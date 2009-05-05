@@ -1,0 +1,80 @@
+Ext.namespace('Fabs.boombox.playlist');
+/*
+ * Fab's BoomBox Version 1.0
+ * Copyright(c) 2009, Owl Watch Consulting Serivces, LLC
+ * support@owlwatch.com
+ * 
+ * BSD License
+ */
+
+/**
+ * @class Fabs.boombox.playlist.Podcast
+ * @extends Fabs.boombox.Playlist
+ * A playlist representing a podcast
+ * @constructor
+ * @param {Object} config The config object
+ */
+Fabs.boombox.playlist.Podcast = Ext.extend( Fabs.boombox.Playlist, {
+    
+	/**
+	 * @cfg {String} url The url of the podcast
+	 */
+	
+	/**
+	 * @cfg {XMLElement} xml The xml element of the podcast
+	 */
+	
+	constructor : function(cfg){
+        Fabs.boombox.playlist.Podcast.superclass.constructor.apply(this,arguments);
+        if( this.url ){
+            this.loadUrl(this.url);
+        }
+        else if( this.xml ){
+            this.loadXML(this.xml);
+        }
+    },
+    
+	/**
+	 * Load a url
+	 * @param {String} url The url of the podcast
+	 */
+    loadUrl : function(url){
+        Ext.Ajax.request({
+            url             :url,
+            scope           :this,
+            success         :this.onRequestSuccess,
+            failure         :this.onRequestFailure
+        });
+    },
+    
+    onRequestSuccess : function(response){
+        this.loadXML(response.responseXML);
+    },
+    
+    onRequestFailure : function(response){
+        // uh-oh.
+    },
+    
+	/**
+	 * Load the xml of the podcast
+	 * @param {XMLElement} xml The xml element of the podcast
+	 */
+    loadXML : function(doc){
+        this.clear();
+    	var q = Ext.DomQuery, songname='', artist='';
+		// ok, lets go through this bad boy.
+		Ext.each(q.select('channel>item', doc), function(item){
+            var title= q.selectValue('title',item);
+			if( title ){
+				var v = title.split(' - ',2);
+				artist = v[0];
+				songname = v[1] || '';
+			}
+			this.addTrack({
+				url				:q.selectValue('link',item),
+                songname        :songname,
+                artist          :artist
+			});
+		}, this);
+    }
+});
