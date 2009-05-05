@@ -1,0 +1,16 @@
+#! /usr/bin/sh
+
+PROJECT_NAME=boombox
+
+REV=$(svn info . | tail -3 | head -1 | awk '{print $4}' )
+
+
+DIST=../dist/$PROJECT_NAME-r$REV
+
+
+C:/Program\ Files/JS\ Builder/JSBuildConsole.exe /path=source/BoomBox.jsb /output=$DIST
+java -jar $EXTDOC_HOME/ext-doc.jar -p doc-config.xml -o $DIST/docs -t doc-template/ext/template.xml -verbose
+cp -rf examples $DIST/
+cp -rf resources $DIST/
+
+tar zcvf $DIST.tar.gz $DIST
