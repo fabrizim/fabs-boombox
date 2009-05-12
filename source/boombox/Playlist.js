@@ -109,8 +109,8 @@ Fabs.boombox.Playlist = Ext.extend( Ext.util.Observable, {
 	 * @param {Array} tracks Tracks to be added
 	 */
 	addTracks : function(tracks){
-		Ext.each(tracks, function(track){
-			this.addTrack(track);
+		Ext.each(tracks, function(track, index){
+			this.addTrack(track, index==tracks.length-1);
 		},this);
 	},
     
@@ -118,7 +118,10 @@ Fabs.boombox.Playlist = Ext.extend( Ext.util.Observable, {
 	 * Adds an track to the current playlist
 	 * @param {Object/Track} track A config object for a Track, or an instance of a Track object
 	 */
-    addTrack : function(track){
+    addTrack : function(track, isLast){
+		if( typeof isLast == 'undefined'){
+			isLast = true;
+		}
 		if( typeof track == 'string' ){
 			track = {url:track};
 		}
@@ -132,7 +135,7 @@ Fabs.boombox.Playlist = Ext.extend( Ext.util.Observable, {
 		events.splice(0,0,'stop','positionchange');
         this._relayTrackEvents(track,events);
 		this.tracks.add(track.id, track);
-		this.fireEvent('trackadded', track, this);
+		this.fireEvent('trackadded', track, isLast, this);
     },
     
 	// private

@@ -7,9 +7,7 @@ if( $podcast_url ){
 }
 $url = @$_REQUEST['url'];
 $default = 'http://sports.espn.go.com/espnradio/podcast/feeds/itunes/podCast?id=2864045';
-setcookie('mp3token', md5('magic'.$_SERVER['REMOTE_ADDR']), 0, '/' );
 $config = require_once(dirname(__FILE__).'/config.php');
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb" >
@@ -38,7 +36,7 @@ $config = require_once(dirname(__FILE__).'/config.php');
 		}
 		?>
         <script type="text/javascript">
-            soundManager.url = 'swf/';
+            soundManager.url = '../resources/swf/';
 			var pl = new Fabs.boombox.playlist.Podcast({url:'podcast.php?podcast_url=<?php echo urlencode($url ? $url : $default); ?>'});
             var p = new Fabs.boombox.Player({autoPlay: true, playlist: pl, volume: 50});
 			window.ui = new Fabs.boombox.ui.FullPlayer({player: p, renderTo: 'boombox', width: 300, maxListHeight: 150, draggable: true, resizeable: true});
@@ -53,7 +51,9 @@ $config = require_once(dirname(__FILE__).'/config.php');
     <body>
         <h1>ExtJS Core + SoundManager2 + Fab's BoomBox</h1>
         <div id="boombox"></div>
-		<div id="log"></div>
-		<div id="track"></div>
+		<ul>
+			<li><a href='?http://sports.espn.go.com/espnradio/podcast/feeds/itunes/podCast?id=2864045'>BS Report (Bill Simmons / ESPN)</a></li>
+			<li><a href='?url=http://feeds2.feedburner.com/StereogumMP3Feed'>Stereogum Podcast</a></li>
+		</ul>
     </body>
 </html>

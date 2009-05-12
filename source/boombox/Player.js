@@ -66,7 +66,7 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 	autoPlayFlag : false,
     
     constructor : function(config){
-        
+		
         this.addEvents({
 			/**
              * @event play
@@ -128,9 +128,6 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 				delete this.tracks;
 			}
         }
-		if( this.autoPlay ){
-			this.next.defer(500,this);
-		}
 		
     },
 	/**
@@ -145,6 +142,7 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 		playlist.on('trackpause', this.onPlaylistTrackPause, this);
 		playlist.on('trackresume', this.onPlaylistTrackResume, this);
 		playlist.on('trackload', this.onPlaylistTrackLoad, this);
+		playlist.on('trackfinish', this.onPlaylistTrackFinish, this);
 		playlist.on('trackerror', this.onPlaylistTrackError, this);
 		this.fireEvent('playlistadded', playlist);
 	},
@@ -217,13 +215,17 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 	},
 	
 	// private
-	onPlaylistTrackAdded : function(track, playlist){
+	onPlaylistTrackAdded : function(track, isLast, playlist){
 		/*
 		if( !this.isPlaying() && this.autoPlay && !this.autoPlayFlag){
 			this.autoPlayFlag = true;
 			track.play();
 		}
 		*/
+		if( isLast && !this.isPlaying() && this.autoPlay ){
+			this.getNextTrack().play();
+			this.autoPlay = false;
+		}
 	},
 	
 	/**

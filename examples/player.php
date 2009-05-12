@@ -1,7 +1,5 @@
 <?php
-setcookie('mp3token', md5('magic'.$_SERVER['REMOTE_ADDR']), 0, '/' );
 $config = require_once(dirname(__FILE__).'/config.php');
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb" >
@@ -30,22 +28,39 @@ $config = require_once(dirname(__FILE__).'/config.php');
 		?>
         <script type="text/javascript">
             // implement the music player here.
-			soundManager.url = 'swf/';
-            var p = new Fabs.boombox.Player({autoPlay: true, shuffle:false, volume:40});
-			<?php
-			foreach( glob('O:/media/music/Spoon/*/*.mp3') as $mp3 ){
-				?>
-				//p.getPlaylist().addTrack('<?php echo addslashes('/music/'.basename(dirname(dirname($mp3))).'/'.basename(dirname($mp3)).'/'.basename($mp3)); ?>');
-				<?php
-			}
-			?>
-			Ext.Ajax.request({
-				url				:'xspf/hideout-49.xspf',
-				success			:function(response){
-					p.getPlaylist().loadXSPF(response.responseXML);
-				}
+			soundManager.url = '../resources/swf/';
+            var p = new Fabs.boombox.Player({
+				autoPlay: true,
+				shuffle:false,
+				volume:40,
+				shuffle:true
 			});
-			window.ui = new Fabs.boombox.ui.FullPlayer({player: p, renderTo: 'boombox', width: 300, maxListHeight: 150, draggable: true, resizeable: true});
+			
+			var tracks = [
+				{
+					url: 'http://owlwatch.net/music/fabrizio-olsen-joyce-and-wheeler/fab 4 - In Walked Bud.mp3',
+					title: 'Fabrizio, Olsen, Joyce and Wheeler - In Walked Bud'
+				},
+				{
+					url: 'http://owlwatch.net/music/fabrizio-olsen-joyce-and-wheeler/fab 4 - Billie\'s Bounce.mp3',
+					title: 'Fabrizio, Olsen, Joyce and Wheeler - Billie\'s Bounce'
+				},
+				{
+					url: 'http://owlwatch.net/music/fabrizio-joyce/Fabrizio - Joyce Duo - Autumn Leaves.mp3',
+					title: 'Fabrizio and Joyce - Autumn Leaves'
+				}
+			];
+			p.getPlaylist().addTracks(tracks);
+			
+			
+			window.ui = new Fabs.boombox.ui.FullPlayer({
+				player: p,
+				renderTo: 'boombox',
+				width: 300,
+				maxListHeight: 150,
+				draggable: true,
+				resizeable: true
+			});
         </script>
         <style type="text/css">
             body{
@@ -57,7 +72,5 @@ $config = require_once(dirname(__FILE__).'/config.php');
     <body>
         <h1>ExtJS Core + SoundManager2 + Fab's BoomBox</h1>
         <div id="boombox"></div>
-		<div id="log"></div>
-		<div id="track"></div>
     </body>
 </html>

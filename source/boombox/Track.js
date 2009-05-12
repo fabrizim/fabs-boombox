@@ -250,9 +250,9 @@ Fabs.boombox.Track = Ext.extend( Ext.util.Observable, {
 	 * @param {Array} fields An array of strings representing the desired fields
 	 * @return {Boolean} hasSongInfo
 	 */
-	hasSongInfo : function(fields){
+	hasSongInfo : function(){
 		var songInfo = true;
-		Ext.each(fields || ['songname','artist'], function(field){
+		Ext.each(arguments || ['songname','artist'], function(field){
 			if( !this[field] || this[field] == '' ){
 				songInfo = false;
 				return false;
@@ -347,6 +347,9 @@ Fabs.boombox.Track = Ext.extend( Ext.util.Observable, {
 				this[prop] = this.id3[prop] || '';
 			}
 		}, this);
+		if( !this.title && this.songname && this.artist ){
+			this.title = this.artist+' - '+this.songname;
+		}
 		this.fireEvent("infochange", this);
     },
 	
