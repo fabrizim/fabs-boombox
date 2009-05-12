@@ -97,7 +97,7 @@ Fabs.util.Hash = Ext.extend( Ext.util.Observable, {
 	/**
 	 * Remove an object from the collection at the specified index
 	 * @param {Number} index
-	 * @return {Object} object The removed object or false if there was an error
+	 * @return {Mixed} object The removed object or false if there was an error
 	 */
 	removeAt : function(index){
 		if(index < this.items.length && index >= 0){
@@ -115,8 +115,8 @@ Fabs.util.Hash = Ext.extend( Ext.util.Observable, {
 	
 	/**
 	 * Remove the specified object from the collection
-	 * @param {Number} index
-	 * @return {Object} object The removed object or false if there was an error
+	 * @param {Mixed} object Object to remove
+	 * @return {Mixed} object The removed object or false if there was an error
 	 */
 	remove : function(obj){
 		return this.removeAt( this.indexOf(obj) );
