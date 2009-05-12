@@ -12,6 +12,8 @@
     <include name="boombox\Track.js" />
     <include name="boombox\Playlist.js" />
     <include name="boombox\Player.js" />
+    <include name="boombox\playlist\Xspf.js" />
+    <include name="boombox\playlist\Podcast.js" />
     <include name="boombox\ui\FullPlayer.js" />
     <include name="boombox\ui\SimpleButton.js" />
   </target>
