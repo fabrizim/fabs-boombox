@@ -2,8 +2,8 @@
 
 PROJECT_NAME=boombox
 
-REV=$(svn info -r 'HEAD' | tail -3 | head -1 | awk '{print $4}' )
-
+#REV=$(svn info -r 'HEAD' | tail -3 | head -1 | awk '{print $4}' )
+REV=9
 
 PNAME=$PROJECT_NAME-r$REV
 
