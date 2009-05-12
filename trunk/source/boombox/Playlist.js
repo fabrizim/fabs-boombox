@@ -53,7 +53,15 @@ Fabs.boombox.Playlist = Ext.extend( Ext.util.Observable, {
              * @param {Track} track
              * @param {Playlist} this
              */
-			'trackremoved'			:true
+			'trackremoved'			:true,
+			/**
+             * @event loaderror
+             * Fires when the a track does not load correctly
+             * @param {Track} track
+             * @param {Playlist} this
+             */
+			'loaderror'				:true
+			
 		});
 		
         Ext.apply(this, config);
@@ -70,6 +78,7 @@ Fabs.boombox.Playlist = Ext.extend( Ext.util.Observable, {
 			this.tracks = new Fabs.util.Hash();
 		}
 		this.on('trackplay', this.onTrackPlay, this);
+		this.on('trackloaderror', this.onTrackLoadError, this);
         
         Fabs.boombox.Playlist.superclass.constructor.call(this);
 		
@@ -79,29 +88,6 @@ Fabs.boombox.Playlist = Ext.extend( Ext.util.Observable, {
 		// should actually call removetrack for each track, but we'll get to that later
 		this.tracks.clear();
 		this.history.clear();
-	},
-	
-	loadXSPF : function(doc){
-		this.clear();
-        var root = doc;
-    	var q = Ext.DomQuery;
-		// ok, lets go through this bad boy.
-		Ext.each(q.select('playlist>trackList>track', root), function(t){
-			var songname = q.selectValue('title',t);
-			var artist = q.selectValue('creator',t);
-			if( !songname ){
-				var a = q.selectValue('annotation',t);
-				var v = a.split(' - ',2);
-				artist = v[0];
-				songname = v[1] || '';
-			}
-			this.addTrack({
-				url				:q.selectValue('location',t),
-				songname		:songname,
-				artist			:artist
-			});
-		}, this);
-		//
 	},
 	
 	/**
@@ -162,21 +148,16 @@ Fabs.boombox.Playlist = Ext.extend( Ext.util.Observable, {
 	getNext : function(shuffle){
 		if( shuffle ){
 			var tmp = [];
-			if(this.history.getLength() != this.tracks.getLength()){
-				var history = this.history.asArray();
+			if(this.history.getLength() < this.tracks.getLength()){
 				this.tracks.each( function(track){
-					var found=false;
-					for(var j=0; j< history.length; j++){
-						if(track === history[j]){
-							history.splice(j,1);
-							found=true;
-							break;
-						}
-					}
-					if(!found){
+					if(!track.loadError && this.history.indexOf(track) == -1 ){
 						tmp[tmp.length] = track;
 					}
-				});
+				}, this);
+				if( tmp.length == 0 && this.history.getLength() > 0 ){
+					tmp = this.history.asArray();
+					this.history.clear();
+				}
 			}
 			else{
 				this.history.clear();
@@ -198,6 +179,11 @@ Fabs.boombox.Playlist = Ext.extend( Ext.util.Observable, {
 	onTrackPlay : function(track){
 		this.history.add(track.id, track);
 		this.index = this.tracks.indexOf(track);
+	},
+	
+	// private
+	onTrackLoadError : function(track){
+		return this.tracks.remove(track);
 	}
     
 });

@@ -137,6 +137,13 @@ Fabs.boombox.Track = Ext.extend( Ext.util.Observable, {
 			'stop',
 			
 			/**
+			 * @event loaderror
+			 * Fires when the track does not load correctly
+			 * @param {Track} this
+			 */
+			'loaderror',
+			
+			/**
 			 * @event infochange
 			 * Fires when the track information is changed
 			 * @param {Track} this
@@ -383,8 +390,12 @@ Fabs.boombox.Track = Ext.extend( Ext.util.Observable, {
 	
 	// private
 	onLoad : function(){
-		console.log(this.soundObject);
-		if( !this.soundObject.readyState == 2 ){
+		if( this.soundObject.readyState == 2 ){
+			this.loadError = true;
+			this.loaded = false;
+			this.ready = false;
+			soundManager.destroySound(this.id);
+			delete( this.soundObject );
 			this.fireEvent('loaderror', this);
 		}
 	}
