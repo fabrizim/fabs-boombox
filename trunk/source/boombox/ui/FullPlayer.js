@@ -109,6 +109,10 @@ Fabs.boombox.ui.FullPlayer = Ext.extend( Ext.util.Observable, {
      */
     minWidth : 200,
     
+    /**
+     * @cfg {HTMLElement/Element/String} renderTo The element, or id of the element, to render this to upon creation
+     */
+    
     // private
     labelScrollDirection : -1, // false for right,  true for left
     
