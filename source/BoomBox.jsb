@@ -18,4 +18,5 @@
   <file name="boombox\ui\FullPlayer.js" path="boombox\ui" />
   <file name="boombox\ui\SimpleButton.js" path="boombox\ui" />
   <file name="boombox\playlist\Podcast.js" path="boombox\playlist" />
+  <file name="boombox\playlist\Xspf.js" path="boombox\playlist" />
 </project>

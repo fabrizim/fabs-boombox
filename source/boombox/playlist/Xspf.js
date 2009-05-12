@@ -8,27 +8,27 @@ Ext.namespace('Fabs.boombox.playlist');
  */
 
 /**
- * @class Fabs.boombox.playlist.Podcast
+ * @class Fabs.boombox.playlist.Xspf
  * @extends Fabs.boombox.Playlist
- * A playlist representing a podcast
+ * A playlist representing an xspf document
  * @constructor
  * @param {Object} config The config object
  */
-Fabs.boombox.playlist.Podcast = Ext.extend( Fabs.boombox.Playlist, {
+Fabs.boombox.playlist.Xspf = Ext.extend( Fabs.boombox.Playlist, {
     
 	/**
-	 * @cfg {String} url The url of the podcast
+	 * @cfg {String} url The url of the xspf
 	 */
 	
 	/**
-	 * @cfg {XMLElement} xml The xml element of the podcast
+	 * @cfg {XMLElement} xml The xml element of the xspf
 	 */
 	
 	constructor : function(cfg){
 		if( typeof cfg == 'string'){
 			cfg = {url:cfg};
 		}
-        Fabs.boombox.playlist.Podcast.superclass.constructor.apply(this,arguments);
+        Fabs.boombox.playlist.Xspf.superclass.constructor.apply(this,arguments);
         if( this.url ){
             this.loadUrl(this.url);
         }
@@ -39,7 +39,7 @@ Fabs.boombox.playlist.Podcast = Ext.extend( Fabs.boombox.Playlist, {
     
 	/**
 	 * Load a url
-	 * @param {String} url The url of the podcast
+	 * @param {String} url The url of the xspf
 	 */
     loadUrl : function(url){
         Ext.Ajax.request({
@@ -60,17 +60,25 @@ Fabs.boombox.playlist.Podcast = Ext.extend( Fabs.boombox.Playlist, {
     
 	/**
 	 * Load the xml of the podcast
-	 * @param {XMLElement} xml The xml element of the podcast
+	 * @param {XMLElement} xml The xml element of the xspf
 	 */
     loadXML : function(doc){
         this.clear();
-    	var q = Ext.DomQuery, songname='', artist='',tracks=[];
+    	var q = Ext.DomQuery, songname='', artist='', title='', tracks=[], annotation;
 		// ok, lets go through this bad boy.
-		Ext.each(q.select('channel>item', doc), function(item){
-            var title= q.selectValue('title',item);
+		Ext.each( q.select('trackList>track', doc), function(track){
+			annotation = q.selectValue('annotation', track);
+            songname = q.selectValue('title', track);
+			artist = q.selectValue('creator', track);
+			title = artist+' - '+songname;
+			if( annotation && (!songname || !artist) ){
+				title = annotation;
+			}
 			tracks[tracks.length] = {
-				url				:q.selectValue('link',item),
-                title			:title
+				url				:q.selectValue('location',track),
+                title			:title,
+				songname		:songname,
+				artist			:artist
 			};
 		}, this);
 		this.addTracks(tracks);
