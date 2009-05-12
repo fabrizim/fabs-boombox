@@ -229,7 +229,6 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 	},
 	
 	onPlaylistTrackLoadError : function(track){
-		console.log(track);
 		this.next();
 	},
 	
