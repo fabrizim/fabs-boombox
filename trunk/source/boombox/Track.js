@@ -158,6 +158,7 @@ Fabs.boombox.Track = Ext.extend( Ext.util.Observable, {
         
         // listen to our own events
         this.on('id3', this.onID3, this);
+		this.on('load', this.onLoad, this);
 		this.on('whileplaying', this.onWhilePlaying, this);
 		this.on('play', this.onPlay, this);
 		this.on('resume', this.onResume, this);
@@ -378,6 +379,14 @@ Fabs.boombox.Track = Ext.extend( Ext.util.Observable, {
 		this.started = false;
 		this.playing = false;
 		this.fireEvent('statechange', this);
+	},
+	
+	// private
+	onLoad : function(){
+		console.log(this.soundObject);
+		if( !this.soundObject.readyState == 2 ){
+			this.fireEvent('loaderror', this);
+		}
 	}
     
 });

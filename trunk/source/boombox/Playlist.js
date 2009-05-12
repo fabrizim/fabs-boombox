@@ -132,7 +132,7 @@ Fabs.boombox.Playlist = Ext.extend( Ext.util.Observable, {
 			track = new Fabs.boombox.Track(track);
 		}
 		var events = Fabs.boombox.smSoundEvents.slice(0);
-		events.splice(0,0,'stop','positionchange');
+		events.splice(0,0,'stop','positionchange','loaderror');
         this._relayTrackEvents(track,events);
 		this.tracks.add(track.id, track);
 		this.fireEvent('trackadded', track, isLast, this);

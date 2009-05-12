@@ -143,7 +143,7 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 		playlist.on('trackresume', this.onPlaylistTrackResume, this);
 		playlist.on('trackload', this.onPlaylistTrackLoad, this);
 		playlist.on('trackfinish', this.onPlaylistTrackFinish, this);
-		playlist.on('trackerror', this.onPlaylistTrackError, this);
+		playlist.on('trackloaderror', this.onPlaylistTrackLoadError, this);
 		this.fireEvent('playlistadded', playlist);
 	},
 	
@@ -226,6 +226,11 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 			this.getNextTrack().play();
 			this.autoPlay = false;
 		}
+	},
+	
+	onPlaylistTrackLoadError : function(track){
+		console.log(track);
+		this.next();
 	},
 	
 	/**
