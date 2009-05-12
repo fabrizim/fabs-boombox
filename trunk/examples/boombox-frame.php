@@ -17,6 +17,7 @@ $config = require_once(dirname(__FILE__).'/config.php');
 		<script type="text/javascript" src="../source/util/Hash.js"></script>
 		<script type="text/javascript" src="../source/boombox/Track.js"></script>
 		<script type="text/javascript" src="../source/boombox/Playlist.js"></script>
+		<script type="text/javascript" src="../source/boombox/playlist/Podcast.js"></script>
 		<script type="text/javascript" src="../source/boombox/Player.js"></script>
 		<script type="text/javascript" src="../source/boombox/ui/FullPlayer.js"></script>
 			<?php
@@ -29,15 +30,13 @@ $config = require_once(dirname(__FILE__).'/config.php');
 		?>
         <script type="text/javascript">
             // implement the music player here.
-			soundManager.url = 'swf/';
-            var p = new Fabs.boombox.Player({autoPlay: false, shuffle:true, volume:40});
-			<?php
-			foreach( glob('O:/media/music/Wilco/*/*.mp3') as $mp3 ){
-				?>
-				p.getPlaylist().addTrack('<?php echo addslashes('/music/'.basename(dirname(dirname($mp3))).'/'.basename(dirname($mp3)).'/'.basename($mp3)); ?>');
-				<?php
-			}
-			?>
+			soundManager.url = '../resources/swf/';
+            var p = new Fabs.boombox.Player({
+				playlist : new Fabs.boombox.playlist.Podcast('podcast.php?podcast_url=http://feeds2.feedburner.com/StereogumMP3Feed'),
+				autoPlay: false,
+				shuffle:true,
+				volume:40
+			});
 			window.ui = new Fabs.boombox.ui.FullPlayer({player: p, width: 300, maxListHeight: 150, resizeable: true, draggable: true});
         </script>
     </head>

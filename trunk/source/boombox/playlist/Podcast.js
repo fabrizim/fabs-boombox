@@ -25,6 +25,9 @@ Fabs.boombox.playlist.Podcast = Ext.extend( Fabs.boombox.Playlist, {
 	 */
 	
 	constructor : function(cfg){
+		if( typeof cfg == 'string'){
+			cfg = {url:cfg};
+		}
         Fabs.boombox.playlist.Podcast.superclass.constructor.apply(this,arguments);
         if( this.url ){
             this.loadUrl(this.url);
@@ -65,15 +68,9 @@ Fabs.boombox.playlist.Podcast = Ext.extend( Fabs.boombox.Playlist, {
 		// ok, lets go through this bad boy.
 		Ext.each(q.select('channel>item', doc), function(item){
             var title= q.selectValue('title',item);
-			if( title ){
-				var v = title.split(' - ',2);
-				artist = v[0];
-				songname = v[1] || '';
-			}
 			this.addTrack({
 				url				:q.selectValue('link',item),
-                songname        :songname,
-                artist          :artist
+                title			:title
 			});
 		}, this);
     }

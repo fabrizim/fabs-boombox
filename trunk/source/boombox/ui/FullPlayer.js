@@ -85,7 +85,7 @@ Fabs.boombox.ui.FullPlayer = Ext.extend( Ext.util.Observable, {
     /**
      * @cfg {String} trackTpl The string template to display for tracks with song information
      */
-    trackTpl : '{playlistIndex}. {artist} - {songname}',
+    trackTpl : '{playlistIndex}. {title}',
     
     /**
      * @cfg {String} unknownTrackTpl The string template to display for tracks without song information
@@ -284,6 +284,24 @@ Fabs.boombox.ui.FullPlayer = Ext.extend( Ext.util.Observable, {
         }
     },
     
+    /**
+     * Safely unrender the UI and remove all events
+     */
+    unrender : function(){
+        Ext.TaskMgr.stop(this.updateTask);
+        Ext.each([this.shuffleBtn, this.playlistCt, this.trackProgress, this.trackLabel, this.volumeBtn], function(o){
+            o.removeAllListeners();
+            // a little housecleaning to keep our EventManager from getting too big.
+            delete Ext.EventManager.elHash[o.dom.id];
+        });
+        for(var name in this.btns){
+            this.btns[name].removeAllListeners();
+            // a little housecleaning to keep our EventManager from getting too big.
+            delete Ext.EventManager.elHash[this.btns[name].dom.id];
+        }
+        this.ct.remove();
+    },
+    
     // private
     resizeInit : function(e){
         this.resizeOrigin = {x: e.getPageX(), width: this.playerCt.getWidth()};
@@ -311,24 +329,6 @@ Fabs.boombox.ui.FullPlayer = Ext.extend( Ext.util.Observable, {
         this.pos = pos;
         this.ct.setXY(this.pos);
         e.preventDefault();
-    },
-    
-    /**
-     * Safely unrender the UI and remove all events
-     */
-    unrender : function(){
-        Ext.TaskMgr.stop(this.updateTask);
-        Ext.each([this.shuffleBtn, this.playlistCt, this.trackProgress, this.trackLabel, this.volumeBtn], function(o){
-            o.removeAllListeners();
-            // a little housecleaning to keep our EventManager from getting too big.
-            delete Ext.EventManager.elHash[o.dom.id];
-        });
-        for(var name in this.btns){
-            this.btns[name].removeAllListeners();
-            // a little housecleaning to keep our EventManager from getting too big.
-            delete Ext.EventManager.elHash[this.btns[name].dom.id];
-        }
-        this.ct.remove();
     },
     
     /**
@@ -477,7 +477,7 @@ Fabs.boombox.ui.FullPlayer = Ext.extend( Ext.util.Observable, {
             track.un('infochange', this.updateTrackInfo, this);
         }
         this.currentTrack = track;
-        if( track.hasSongInfo(['songname','artist']) ){
+        if( track.hasSongInfo('title') ){
             this.updateTrackInfo();
         }
         else{
@@ -502,7 +502,7 @@ Fabs.boombox.ui.FullPlayer = Ext.extend( Ext.util.Observable, {
     // private
     updateTrackInfo : function(){
         this.resetTrackScroll();
-        this.trackLabel.update((this.player.getPlaylist().tracks.indexOf(this.currentTrack)+1)+'. '+this.currentTrack.artist+' - '+this.currentTrack.songname);
+        this.trackLabel.update((this.player.getPlaylist().tracks.indexOf(this.currentTrack)+1)+'. '+this.currentTrack.title);
     },
     
     // private
@@ -613,7 +613,7 @@ Fabs.boombox.ui.FullPlayer = Ext.extend( Ext.util.Observable, {
                 tag             :'a',
                 href            :'javascript:;',
                 cls             :'bb-track',
-                html            :this[track.hasSongInfo()?'trackTpl':'unknownTrackTpl'].apply(track)
+                html            :this[track.hasSongInfo('title')?'trackTpl':'unknownTrackTpl'].apply(track)
             });
             this.trackMap[el.dom.id] = track;
             this.trackMapR[track.id] = el;

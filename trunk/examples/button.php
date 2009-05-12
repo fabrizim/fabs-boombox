@@ -31,7 +31,7 @@ $config = require_once(dirname(__FILE__).'/config.php');
 		?>
         <script type="text/javascript">
             // implement the music player here.
-			soundManager.url = 'swf/';
+			soundManager.url = '../resources/swf/';
             Fabs.boombox.ui.SimpleButton.create('.button');
         </script>
         <style type="text/css">
@@ -42,7 +42,7 @@ $config = require_once(dirname(__FILE__).'/config.php');
         </style>
     </head>
     <body>
-        <h1>ExtJS Core + SoundManager2 + Fab's BoomBox</h1>
+        <h1>Simple Button Example</h1>
         <a href='http://schworer.com/images/music/Schworer_041309.mp3' class="button">Play</a>
     </body>
 </html>
