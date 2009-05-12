@@ -9,6 +9,9 @@
 	<link rel="icon" href="http://www.jackslocum.com/favicon.ico" />
 	<style type="text/css">
 	#boombox{ z-index: 40000; overflow: visible; width: 1px; position: absolute; top: 6px; left: 300px; }
+	.description p{ margin-bottom: 2em; }
+	.description blockquote{ margin-left: 2em; margin-bottom: 2em}
+	.description pre{ font-size: 1.2em; }
 		</style>
 	<!-- GC -->
 </head>
@@ -23,11 +26,17 @@
 	<script type="text/javascript" src="../resources/js/soundmanager2-nodebug-jsmin.js"></script>
 	<script type="text/javascript" src="../boombox.js"></script>
 	<script type="text/javascript">
+	
+	/* VERY IMPORTANT - need to intialize the soundManager with the swf location */
 	soundManager.url = '../resources/swf/';
+	
+	var playlist = new Fabs.boombox.playlist.Podcast('../examples/podcast.php?podcast_url=http://feeds2.feedburner.com/StereogumMP3Feed');
+	
 	var player = new Fabs.boombox.Player({
-	  playlist : new Fabs.boombox.playlist.Podcast('../examples/podcast.php?podcast_url=http://feeds2.feedburner.com/StereogumMP3Feed'),
+	  playlist : playlist,
 	  shuffle : true
 	});
+	
 	var ui = new Fabs.boombox.ui.FullPlayer({
 	  player : player,
 	  width : 300,
