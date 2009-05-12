@@ -33,7 +33,7 @@
 .bb-playlist-ct{ color: #fff; position: absolute; margin: 0px 9px; top: 22px; height: 0px; background: #000; overflow-y: auto; overflow-x: hidden; z-index: 1;}
 /* .playlist-open .bb-playlist-ct{ border: 2px solid #000; border-top-width: 0px;  } */
 .bb-playlist-scroller{ position: relative; }
-.bb-track{ z-index: 1; position: relative; display: block; text-decoration: none; color: #ffffff; white-space: nowrap; font-size: 10px; font-family: "Trebuchet MS"; border-bottom: 1px solid #333; padding: 2px 3px; cursor: pointer; }
+.bb-track, .bb-track:link, .bb-track:visited{ z-index: 1; position: relative; display: block; text-decoration: none; color: #ffffff; white-space: nowrap; font-size: 10px; font-family: "Trebuchet MS"; border-bottom: 1px solid #333; padding: 2px 3px; cursor: pointer; }
 .bb-track:active{ text-decoration: none; }
 .bb-track:hover{ background-color: #303030; text-decoration: none; }
 .bb-track-progress{ position: absolute; overflow: visible; bottom: 2px; width: 100%; height: 2px; line-height: 2px; font-size: 2px; border-bottom: 1px solid #cccccc; cursor: pointer; }

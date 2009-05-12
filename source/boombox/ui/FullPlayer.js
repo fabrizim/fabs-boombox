@@ -460,7 +460,7 @@ Fabs.boombox.ui.FullPlayer = Ext.extend( Ext.util.Observable, {
         if( lw > lc ){
             var o = lw - lc;
             var left = this.trackLabelMouseOrigin.scrollLeft;
-            this.trackScroller.scrollTo('l', Math.max( Math.min(o, d+left), 0) );
+            this.trackScroller.scrollTo('left', Math.max( Math.min(o, d+left), 0) );
         }
         e.preventDefault();
     },
@@ -497,7 +497,7 @@ Fabs.boombox.ui.FullPlayer = Ext.extend( Ext.util.Observable, {
     // private
     resetTrackScroll : function(){
         if( this.trackScroller ){
-            this.trackScroller.scrollTo('l',0);
+            this.trackScroller.scrollTo('left',0);
         }
         this.labelScrollDirection=-1;
         this.scrollHoldIndex=0;
@@ -548,10 +548,10 @@ Fabs.boombox.ui.FullPlayer = Ext.extend( Ext.util.Observable, {
                 this.labelScrollDirection *= -1;
             }
             var d = this.scrollIncrement * this.labelScrollDirection;
-            this.trackScroller.scrollTo('l',left+d);
+            this.trackScroller.scrollTo('left',left+d);
         }
         else{
-            this.trackScroller.scrollTo(0);
+            this.trackScroller.scrollTo('left',0);
         }
         
     },
