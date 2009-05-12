@@ -12,7 +12,7 @@ $config = require_once(dirname(__FILE__).'/config.php');
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb" >
     <head>
-		<title>Music Player Test Page</title>
+		<title>Podcast Example</title>
 		<link rel="stylesheet" type="text/css" href="../resources/css/boombox.css" />
         <script type="text/javascript" src="../resources/js/ext-core-debug.js"></script>
         <script type="text/javascript" src="../resources/js/soundmanager2-nodebug-jsmin.js"></script>
@@ -49,7 +49,7 @@ $config = require_once(dirname(__FILE__).'/config.php');
         </style>
     </head>
     <body>
-        <h1>ExtJS Core + SoundManager2 + Fab's BoomBox</h1>
+        <h1>Fab's BoomBox + Podcast Playlist</h1>
         <div id="boombox"></div>
 		<ul>
 			<li><a href='?http://sports.espn.go.com/espnradio/podcast/feeds/itunes/podCast?id=2864045'>BS Report (Bill Simmons / ESPN)</a></li>
