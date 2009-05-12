@@ -2,11 +2,65 @@
     <div class="col">
         <div id="search">     	
         </div>
+		<div class="description">
 		<p>Welcome to the documentation for Fab's Boombox. The boombox has been organized into
 		model classes and view classes.</p>
+		
+		<p>This documentation page serve's as a pretty good example as well. Check your firebug
+		if you are in Firefox. You can play around with some of the main objects.</p>
+		
+		<pre>ui</pre>
+		<blockquote>This is the Fabs.boombox.ui.FullPlayer object you see at the top of the
+		page. It is simply a view and only contains simple 'onclick' type handling to route to the Player object.
+		You can drag it around and resize it. It listens to the underlying Player object
+		for updates to display.</blockquote>
+		
+		<pre>player</pre>
+		<blockquote> This is the Fabs.boombox.Player object that basically acts as a
+		controller. It routes commands to the Tracks in the playlist and listens to events
+		in the Playlist.</blockquote>
+		
+		<pre>playlist</pre>
+		<blockquote>This is an implementation of the Fabs.boombox.playlist.Podcast. It
+		is using a podcast from the <a href="http://stereogum.com">Stereogum website</a>. It
+		is basically just a simple collection of Tracks. Its main function is to retain
+		a history of tracks played and locate the next song to be played.</blockquote>
+		</div>
     </div>
     <div class="col-last">
+        
+		<div class="res-block">
+            <div class="res-block-inner">
+                <h3>Project Home</h3>
+                <ul>
+					<li><a href='http://code.google.com/p/fabs-boombox'>Google Project Page</a></li>
+				</ul>
+            </div>
+        </div>
+		
+		<div class="res-block">
+            <div class="res-block-inner">
+                <h3>Examples</h3>
+                <ul>
+					<li><a href='../examples/index.php'>Index of examples</a></li>
+					<li><a href='../examples/player.php'>Basic example</a></li>
+					<li><a href='../examples/frames.php'>Frames example</a></li>
+					<li><a href='../examples/podcast.php'>Podcast example</a></li>
+					<li><a href='../examples/xspf.php'>XSPF example</a></li>
+				</ul>
+            </div>
+        </div>
+		
         <div class="res-block">
+            <div class="res-block-inner">
+                <h3>Support</h3>
+                <ul>
+					<li><a href='http://code.google.com/p/fabs-boombox/issues/list'>Google Code Isssues</a></li>
+				</ul>
+            </div>
+        </div>
+		
+		<div class="res-block">
             <div class="res-block-inner">
                 <h3>About the author</h3>
                 <ul>
@@ -14,15 +68,7 @@
                 </ul>
             </div>
         </div>
-        <div class="res-block">
-            <div class="res-block-inner">
-                <h3>Support</h3>
-                <p>
-					There is no direct support for this code right now. If there are issues, please
-					post them on the google code page.
-				</p>
-            </div>
-        </div>
+		
 		<div class="res-block">
             <div class="res-block-inner">
                 <h3>Contribute</h3>

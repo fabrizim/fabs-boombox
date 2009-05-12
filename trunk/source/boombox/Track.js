@@ -390,7 +390,7 @@ Fabs.boombox.Track = Ext.extend( Ext.util.Observable, {
 	
 	// private
 	onLoad : function(){
-		if( this.soundObject.readyState == 2 ){
+		if( this.soundObject.readyState === 2 ){
 			this.loadError = true;
 			this.loaded = false;
 			this.ready = false;

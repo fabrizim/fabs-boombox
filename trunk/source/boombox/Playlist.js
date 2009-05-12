@@ -55,12 +55,12 @@ Fabs.boombox.Playlist = Ext.extend( Ext.util.Observable, {
              */
 			'trackremoved'			:true,
 			/**
-             * @event loaderror
+             * @event trackloaderror
              * Fires when the a track does not load correctly
              * @param {Track} track
              * @param {Playlist} this
              */
-			'loaderror'				:true
+			'trackloaderror'				:true
 			
 		});
 		
