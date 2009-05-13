@@ -4,7 +4,7 @@ Ext.namespace('Fabs.boombox.ui');
  * Copyright(c) 2009, Owl Watch Consulting Serivces, LLC
  * support@owlwatch.com
  * 
- * BSD License
+ * MIT License
  */
 
 /**
@@ -273,6 +273,7 @@ Fabs.boombox.ui.FullPlayer = Ext.extend( Ext.util.Observable, {
         
         // playlist container
         this.playlistCt = this.ct.child('.bb-playlist-ct');
+        this.playlistCt.setOpacity(0, false);
         this.playlistScroller = this.playlistCt.child('.bb-playlist-scroller');
         this.playlistCt.on('scroll', function(e){ if(e&&e.stopPropogation) e.stopPropogation(); } );
         
@@ -574,7 +575,7 @@ Fabs.boombox.ui.FullPlayer = Ext.extend( Ext.util.Observable, {
      */
     togglePlaylist : function(){
         var E = Ext.EventManager;
-        if( this.playlistCt.getHeight() > 0 ){
+        if( this.playlistCt.getHeight() > 0 || this.playlistCt.getStyle('opacity') > 0){
             this.btns.playlist.dom.title = this.lang.openPlaylist;
             this.ct.removeClass('playlist-open');
             E.un(this.doc,'click', this.playlistClickTest, this);
@@ -612,7 +613,11 @@ Fabs.boombox.ui.FullPlayer = Ext.extend( Ext.util.Observable, {
         // this just ensures that the playlist is empty.
         this.player.getPlaylist().tracks.each( function(track, key, index){
             track.playlistIndex = index+1;
-            track.filename = decodeURIComponent( /\/([^\/]*)$/.exec(track.url)[1]).replace(/\.mp3$/, '');
+            try{
+                track.filename = /\/([^\/]*)$/.exec( decodeURIComponent( track.url))[1].replace(/\.mp3$/, '');
+            }catch(e){
+                track.filename = track.url;
+            }
             var el = this.playlistScroller.createChild({
                 tag             :'a',
                 href            :'javascript:;',

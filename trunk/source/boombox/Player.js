@@ -3,7 +3,7 @@
  * Copyright(c) 2009, Owl Watch Consulting Serivces, LLC
  * support@owlwatch.com
  * 
- * BSD License
+ * MIT License
  */
 
 /**
@@ -197,17 +197,6 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 	},
 	
 	// private
-	onPlaylistTrackLoad : function(track, success){
-		if(track.soundObject.readyState==2){
-			// uh-oh, error
-			console.log(track.soundObject.readyState, 'error loading track '+track.id);
-		}
-		else{
-			console.log('track loadded successfully '+track.id);
-		}
-	},
-	
-	// private
 	onPlaylistAdded : function(playlist){
 		if( this.activePlaylistIndex == -1 ){
 			this.activePlaylistIndex = 0;
@@ -228,6 +217,7 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 		}
 	},
 	
+	// private
 	onPlaylistTrackLoadError : function(track){
 		this.next();
 	},

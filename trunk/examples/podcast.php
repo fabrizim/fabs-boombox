@@ -53,7 +53,7 @@ $config = require_once(dirname(__FILE__).'/config.php');
         <div id="boombox"></div>
 		<ul>
 			<li><a href='?http://sports.espn.go.com/espnradio/podcast/feeds/itunes/podCast?id=2864045'>BS Report (Bill Simmons / ESPN)</a></li>
-			<li><a href='?url=http://feeds2.feedburner.com/StereogumMP3Feed'>Stereogum Podcast</a></li>
+			<li><a href='?url=http://feeds2.feedburner.com/StereogumMP3Feed'>Stereogum Podcast</a> (For me, this only works in Firefox - looks like it may be due to trying to resolve the urls of the mp3)</li>
 		</ul>
     </body>
 </html>

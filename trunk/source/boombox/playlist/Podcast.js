@@ -4,7 +4,7 @@ Ext.namespace('Fabs.boombox.playlist');
  * Copyright(c) 2009, Owl Watch Consulting Serivces, LLC
  * support@owlwatch.com
  * 
- * BSD License
+ * MIT License
  */
 
 /**
@@ -51,11 +51,11 @@ Fabs.boombox.playlist.Podcast = Ext.extend( Fabs.boombox.Playlist, {
     },
     
     onRequestSuccess : function(response){
-        this.loadXML(response.responseXML);
+		this.loadXML(response.responseXML);
     },
     
     onRequestFailure : function(response){
-        // uh-oh.
+		// uh-oh.
     },
     
 	/**
@@ -63,10 +63,11 @@ Fabs.boombox.playlist.Podcast = Ext.extend( Fabs.boombox.Playlist, {
 	 * @param {XMLElement} xml The xml element of the podcast
 	 */
     loadXML : function(doc){
+		var root = doc.documentElement || doc;
         this.clear();
     	var q = Ext.DomQuery, songname='', artist='',tracks=[];
 		// ok, lets go through this bad boy.
-		Ext.each(q.select('channel>item', doc), function(item){
+		Ext.each(q.select('channel item', root), function(item){
             var title= q.selectValue('title',item);
 			tracks[tracks.length] = {
 				url				:q.selectValue('link',item),
