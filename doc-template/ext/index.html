@@ -1,4 +1,5 @@
-<html lang="en" xmlns:ext="http://extjs.com/docs">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb" >
 <head>
   <title>Fab's Boombox - API Documentation</title>
     <link rel="stylesheet" type="text/css" href="http://extjs.cachefly.net/ext-2.2/resources/css/ext-all.css" />
@@ -11,7 +12,7 @@
 	#boombox{ z-index: 40000; overflow: visible; width: 1px; position: absolute; top: 6px; left: 300px; }
 	.description p{ margin-bottom: 2em; }
 	.description blockquote{ margin-left: 2em; margin-bottom: 2em}
-	.description pre{ font-size: 1.2em; }
+	.description pre{ font-size: 1.2em; margin-bottom: .6em;}
 		</style>
 	<!-- GC -->
 </head>
@@ -30,7 +31,7 @@
 	/* VERY IMPORTANT - need to intialize the soundManager with the swf location */
 	soundManager.url = '../resources/swf/';
 	
-	var playlist = new Fabs.boombox.playlist.Podcast('../examples/podcast.php?podcast_url=http://feeds2.feedburner.com/StereogumMP3Feed');
+	var playlist = new Fabs.boombox.playlist.Xspf('../examples/xspf.php?xspf_url=http://hideout.com.br/shows/allshows.xspf');
 	
 	var player = new Fabs.boombox.Player({
 	  playlist : playlist,
@@ -40,6 +41,7 @@
 	var ui = new Fabs.boombox.ui.FullPlayer({
 	  player : player,
 	  width : 300,
+	  maxListHeight: 200,
 	  resizeable : true,
 	  draggable : true,
 	  renderTo : 'boombox'

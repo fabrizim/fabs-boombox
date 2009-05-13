@@ -4,7 +4,7 @@ Ext.namespace('Fabs.boombox.playlist');
  * Copyright(c) 2009, Owl Watch Consulting Serivces, LLC
  * support@owlwatch.com
  * 
- * BSD License
+ * MIT License
  */
 
 /**
@@ -64,9 +64,10 @@ Fabs.boombox.playlist.Xspf = Ext.extend( Fabs.boombox.Playlist, {
 	 */
     loadXML : function(doc){
         this.clear();
+		var root = doc.documentElement || doc;
     	var q = Ext.DomQuery, songname='', artist='', title='', tracks=[], annotation;
 		// ok, lets go through this bad boy.
-		Ext.each( q.select('trackList>track', doc), function(track){
+		Ext.each( q.select('trackList track', root), function(track){
 			annotation = q.selectValue('annotation', track);
             songname = q.selectValue('title', track);
 			artist = q.selectValue('creator', track);

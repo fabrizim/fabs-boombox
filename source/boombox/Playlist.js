@@ -3,7 +3,7 @@
  * Copyright(c) 2009, Owl Watch Consulting Serivces, LLC
  * support@owlwatch.com
  * 
- * BSD License
+ * MIT License
  */
 
 /**
