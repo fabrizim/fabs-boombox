@@ -75,6 +75,12 @@ Fabs.boombox.Track = Ext.extend( Ext.util.Observable, {
     
     constructor : function(config){
         
+		
+		this.autoLoad = false;
+	
+		this.playing = false;
+		this.started = false;
+		
         if( typeof config == 'string' ){
             config = {url: config, name: ''};
         }
