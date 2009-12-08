@@ -29,9 +29,9 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 	
 	/**
 	 * Read-only. History of tracks played
+	 * @var history
 	 * @type Array
 	 */
-	history : [],
 	
 	activePlaylistIndex : -1,
 	
@@ -68,6 +68,7 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
     constructor : function(config){
 		
 		this.playlists = [];
+		this.history = [];
 		
 		this.currentTrack = null;
 		this.autoPlayFlag = false;
@@ -118,8 +119,6 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 		this.history = [];
 		
 		this.on('playlistadded', this.onPlaylistAdded, this);
-        
-		console.log(this.playlist, this.playlists);
 		
 		if( this.playlist ){
 			this.addPlaylist(this.playlist);
