@@ -17,9 +17,9 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
     
 	/**
 	 * Read-only. Array of playlists
+	 * @var playlists
 	 * @type Array
 	 */
-    playlists : [],
 	
 	/**
 	 * Read-only. Index of current playing track in history
@@ -118,7 +118,9 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 		this.history = [];
 		
 		this.on('playlistadded', this.onPlaylistAdded, this);
-                
+        
+		console.log(this.playlist, this.playlists);
+		
 		if( this.playlist ){
 			this.addPlaylist(this.playlist);
 			delete this.playlist;
