@@ -60,6 +60,10 @@ Fabs.boombox.playlist.Podcast = Ext.extend( Fabs.boombox.Playlist, {
     
 	/**
 	 * Load the xml of the podcast
+	 *
+	 * TODO - parse the namespace attributes... No support
+	 * within DomQuery
+	 * 
 	 * @param {XMLElement} xml The xml element of the podcast
 	 */
     loadXML : function(doc){
