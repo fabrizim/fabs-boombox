@@ -30,6 +30,9 @@ Fabs.boombox.Playlist = Ext.extend( Ext.util.Observable, {
     constructor : function(config){
 		
 		this.index = -1;
+		this.history = null;
+		this.tracks = null;
+		this.remaining = [];
 		
         if( Ext.isArray('array') ){
             config = {tracks: config};
