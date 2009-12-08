@@ -25,6 +25,9 @@ Fabs.util.Hash = Ext.extend( Ext.util.Observable, {
 	map : {},
 	
 	constructor : function(){
+		this.items = [];
+		this.keys = [];
+		this.map = {};
 		Fabs.util.Hash.superclass.constructor.call(this);
 	},
 	
