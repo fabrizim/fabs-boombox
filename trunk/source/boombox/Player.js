@@ -69,6 +69,9 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 		
 		this.playlists = [];
 		
+		this.currentTrack = null;
+		this.autoPlayFlag = false;
+		
         this.addEvents({
 			/**
              * @event play
