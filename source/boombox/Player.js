@@ -236,6 +236,7 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 		this.fireEvent('trackloaderror', this, this.currentTrack);
 		this.currentTrack = null;
 		this.next();
+		this.fireEvent('statechange', this);
 	},
 	
 	/**
