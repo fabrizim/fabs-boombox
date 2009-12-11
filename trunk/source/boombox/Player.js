@@ -107,7 +107,14 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
              * Fires when a playlist is added to the player
              * @param {Playlist} this
              */
-			'playlistadded'		:true
+			'playlistadded'		:true,
+			
+			/**
+             * @event trackloaderror
+             * Fires when a track fails to load
+             * @param {Playlist} this
+             */
+			'trackloaderror'		:true
         });
         
         Ext.apply(this,config);
@@ -225,7 +232,10 @@ Fabs.boombox.Player = Ext.extend( Ext.util.Observable, {
 	
 	// private
 	onPlaylistTrackLoadError : function(track){
-		this.next();
+		this.fireEvent('trackloaderror', this, this.currentTrack());
+		if(this.getNextTrack()){
+			this.next();
+		}
 	},
 	
 	/**

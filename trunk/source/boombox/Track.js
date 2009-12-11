@@ -400,9 +400,11 @@ Fabs.boombox.Track = Ext.extend( Ext.util.Observable, {
 			this.loadError = true;
 			this.loaded = false;
 			this.ready = false;
+			this.playing = false;
 			soundManager.destroySound(this.id);
 			delete( this.soundObject );
 			this.fireEvent('loaderror', this);
+			this.fireEvent('statechange', this);
 		}
 	}
     
