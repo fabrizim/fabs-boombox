@@ -401,10 +401,12 @@ Fabs.boombox.Track = Ext.extend( Ext.util.Observable, {
 			this.loaded = false;
 			this.ready = false;
 			this.playing = false;
+			this.fireEvent('statechange', this);
+			
 			soundManager.destroySound(this.id);
 			delete( this.soundObject );
 			this.fireEvent('loaderror', this);
-			this.fireEvent('statechange', this);
+			
 		}
 	}
     
