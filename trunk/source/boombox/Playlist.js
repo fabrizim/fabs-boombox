@@ -151,6 +151,9 @@ Fabs.boombox.Playlist = Ext.extend( Ext.util.Observable, {
 	 * random track from the tracks that have yet to be played in the playlist
 	 */
 	getNext : function(shuffle){
+		if( this.tracks.getLength() == 0 ){
+			return false;
+		}
 		if( shuffle ){
 			var tmp = [];
 			if(this.history.getLength() < this.tracks.getLength()){
